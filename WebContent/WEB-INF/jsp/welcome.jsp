@@ -112,7 +112,6 @@
 				<ul class="rslides" id="slider">
 					<li>
 					<img src="<%=request.getContextPath()%>/resources/images/bnr3.jpg"/>
-					<!--<img src="/TourFrancia/WebContent/resources/images/bnr3.jpg" alt="">-->
 						<div class="banner-info">
 							<h3>Sed ultricies elementum.</h3>
 							<p>Lorem Interdum et malesuada fames ac ante ipsum primis in
@@ -124,7 +123,6 @@
 						</div></li>
 					<li>
 					<img src="<%=request.getContextPath()%>/resources/images/bnr2.jpg"/>
-					<!--<img src="/TourFrancia/WebContent/resources/images/bnr2.jpg" alt=""> -->
 						<div class="banner-info">
 							<h3>Curabitur turpis posuere rutrum.</h3>
 							<p>Lorem Interdum et malesuada fames ac ante ipsum primis in
@@ -136,7 +134,6 @@
 						</div></li>
 					<li>
 					<img src="<%=request.getContextPath()%>/resources/images/bnr1.jpg"/>
-					<!-- <img src="/TourFrancia/WebContent/resources/images/bnr1.jpg" alt=""> -->
 						<div class="banner-info">
 							<h3>Sed ultricies elementum.</h3>
 							<p>Lorem Interdum et malesuada fames ac ante ipsum primis in
@@ -203,7 +200,7 @@
 		<div class="container">
 			<div class="content-grids">
 				<div class="col-md-4 content-grid1">
-					<img src="/resources/images/c1.jpg" alt="" />
+					<img src="<%=request.getContextPath()%>/resources/images/c1.jpg" alt="" />
 					<h3>Champion's League</h3>
 					<p>Letraset sheets containing Lorem Ipsum passages, and more
 						recently with desktop publishing software like Aldus Letraset
@@ -212,7 +209,7 @@
 					<a href="#">Read More..</a>
 				</div>
 				<div class="col-md-4 content-grid1">
-					<img src="/resources/images/c2.jpg" alt="" />
+					<img src="<%=request.getContextPath()%>/resources/images/c2.jpg" alt="" />
 					<h3>Women's Cup</h3>
 					<p>Letraset sheets containing Lorem Ipsum passages, and more
 						recently with desktop publishing software like Aldus Letraset
@@ -221,7 +218,7 @@
 					<a href="#">Read More..</a>
 				</div>
 				<div class="col-md-4 content-grid1">
-					<img src="/resources/images/c3.jpg" alt="" />
+					<img src="<%=request.getContextPath()%>/resources/images/c3.jpg" alt="" />
 					<h3>Final Tournment</h3>
 					<p>Letraset sheets containing Lorem Ipsum passages, and more
 						recently with desktop publishing software like Aldus Letraset
@@ -260,7 +257,7 @@
 					<h3>ABOUT</h3>
 					<h4>Morbi sed arcu mollis, elementum erat venenatis, tincidunt
 						tellus.</h4>
-					<img src="/resources/images/cnt.ab.jpg" alt="" />
+					<img src="<%=request.getContextPath()%>/resources/images/cnt.ab.jpg" alt="" />
 					<p>Aenean ut condimentum magna, mattis pretium massa. Sed
 						sollicitudin ullamcorper auctor. Duis vestibulum velit id augue
 						pulvinar egestas. Morbi sed orci auctor, feugiat felis at,
@@ -270,7 +267,7 @@
 					<h3>OUR COACHES</h3>
 					<div class="coch-grid chr">
 						<div class="coach-pic">
-							<img src="/resources/images/ch1.jpg" alt="" />
+							<img src="<%=request.getContextPath()%>/resources/images/ch1.jpg" alt="" />
 						</div>
 						<div class="coach-pic-info">
 							<h4>
@@ -284,7 +281,7 @@
 					</div>
 					<div class="coch-grid">
 						<div class="coach-pic">
-							<img src="/resources/images/ch2.jpg" alt="" />
+							<img src="<%=request.getContextPath()%>/resources/images/ch2.jpg" alt="" />
 						</div>
 						<div class="coach-pic-info">
 							<h4>
