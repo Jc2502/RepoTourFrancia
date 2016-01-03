@@ -38,7 +38,6 @@
     <bean name="userDao" class="com.tourfrancia.dao.impl.UserDaoImpl">
     </bean>
     
-    <bean id="loginBean" class ="com.tourfrancia.viewBean.LoginBean">
-    </bean>
+    
 
 </beans>

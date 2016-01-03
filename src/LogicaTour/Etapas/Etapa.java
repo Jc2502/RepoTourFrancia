@@ -5,6 +5,8 @@
  */
 package LogicaTour.Etapas;
 
+import LogicaTour.Equipos.Ciclista;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,13 +20,10 @@ public class Etapa{
     private String ciudadOrigen;
     private String ciudadDestino;
     private Map<String, InterfazTerreno> listaDesniveles; 
+    private Ciclista ganador_etapa;
 
-
-    public Etapa(int numeroEtapa, int numeroKilometros, String ciudadOrigen, String ciudadDestino) {
-        this.numeroEtapa = numeroEtapa;
-        this.numeroKilometros = numeroKilometros;
-        this.ciudadOrigen = ciudadOrigen;
-        this.ciudadDestino = ciudadDestino;
+    public Etapa() {
+        listaDesniveles = new HashMap<>();
     }
 
     
@@ -71,4 +70,13 @@ public class Etapa{
         this.listaDesniveles = listaDesniveles;
     }
 
+    public Ciclista getGanador_etapa() {
+        return ganador_etapa;
+    }
+
+    public void setGanador_etapa(Ciclista ganador_etapa) {
+        this.ganador_etapa = ganador_etapa;
+    }
+    
+    
 }

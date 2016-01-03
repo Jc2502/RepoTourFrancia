@@ -4,7 +4,6 @@ LogicaTour\Equipos\Ciclista.class
 LogicaTour\Maillots\MaillotVerde.class
 LogicaTour\Maillots\MaillotAmarillo.class
 LogicaTour\Equipos\Equipo.class
-com\tourfrancia\controller\TourFrancia.class
 LogicaTour\Etapas\Etapa.class
 LogicaTour\Tour_Francia\InterfazTour.class
 LogicaTour\Etapas\InterfazTerreno.class

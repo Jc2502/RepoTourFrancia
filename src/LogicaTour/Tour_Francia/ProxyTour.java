@@ -5,6 +5,12 @@
  */
 package LogicaTour.Tour_Francia;
 
+import LogicaTour.Equipos.Ciclista;
+import LogicaTour.Equipos.Equipo;
+import LogicaTour.Etapas.Etapa;
+import LogicaTour.Etapas.Puerto;
+import java.util.List;
+
 /**
  *
  * @author carlo_000
@@ -29,8 +35,42 @@ public class ProxyTour implements InterfazTour {
     }
     
     @Override
-    public void addPuertoEtapa(int numeroEtapa, String nombre, String alturaMaxima, String categoria) {
+    public void addPuertoEtapa(int numeroEtapa, String nombre, int alturaMaxima, String categoria) {
         tour.addPuertoEtapa(numeroEtapa, nombre, alturaMaxima, categoria);
+    }
+
+    @Override
+    public Equipo getEquipo(String nombreEquipo) {
+        return tour.getEquipo(nombreEquipo);
+    }
+
+    @Override
+    public Ciclista getCiclista(String nombreCiclista) {
+        return tour.getCiclista(nombreCiclista);
+    }
+
+    @Override
+    public List<String> getCiclistas() {
+        return tour.getCiclistas();
+    }
+
+    @Override
+    public List<String> getEquipos() {
+        return tour.getEquipos();
+    }
+
+    @Override
+    public List<Puerto> getPuertos() {
+        return tour.getPuertos();
+    }   
+    @Override
+    public List<Etapa> getEtapas() {
+        return tour.getEtapas();
+    }
+
+    @Override
+    public List<Puerto> getPuertos(String categoria) {
+            return tour.getPuertos(categoria);
     }
     
 }

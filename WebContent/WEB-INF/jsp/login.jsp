@@ -47,18 +47,11 @@
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">SOCCER</a></h1>
+			   <h1><a href="">LE TOUR</a></h1>
 		 </div>	
 		 <div class="top-menu">
 			 <span class="menu"></span>
-			<!--  <ul>
-				 <li><a href="index.html">INICIO</a></li>
-				 <li class="active"><a href="galeria.html">GALERIA</a></li>
-				 <li><a href="laCarrera.html">LA CARRERA</a></li>
-                                 <li><a href="entrenamientos.html">ENTRENAMIENTOS</a></li>
-				 <li><a href="noticias.html">NOTICIAS & EVENTOS</a></li>
-				 <li><a href="contacto.html">CONTACTO</a></li>
-			 </ul>	-->		 
+	 
 		 </div>
 		 <!-- script-for-menu -->
 		 <script>
@@ -73,24 +66,7 @@
 </div>
 <!-- //header -->
 <!-- banner -->
-<div class="strip">
-	 <div class="container">
-	 <div class="search">
-		    <form>
-		    	<input type="text" value="" placeholder="Search...">
-				<input type="submit" value="">
-			</form>
-     </div>     
-	 <div class="social">			 
-			 <a href="#"><i class="facebook"></i></a>
-			 <a href="#"><i class="twitter"></i></a>
-			 <a href="#"><i class="dribble"></i></a>	
-			 <a href="#"><i class="google"></i></a>	
-			 <a href="#"><i class="youtube"></i></a>	
-	 </div>
-		<div class="clearfix"></div>
-		</div>
-</div>
+<div class="container">
 <form:form id="loginForm" method="post" action="login" commandName="loginBean">
 
             <form:label path="username">Enter your user-name</form:label>
@@ -99,7 +75,9 @@
             <form:password id="password" name="password" path="password" /><br>
            <input type="submit" value="Submit" />
         </form:form>
+</div>
 
+<h4>${message}</h4>
 
 <div class="footer">
 	 <div class="container">

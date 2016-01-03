@@ -5,6 +5,7 @@
  */
 package LogicaTour.Equipos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,11 +14,14 @@ import java.util.List;
  */
 public class Equipo {
     private List<Ciclista> ciclistas;
-    private String nombreEquipo;
+    private String nombre;
     private String nombreDirector;
 
-    public Equipo(String nombreEquipo, String nombreDirector) {
-        this.nombreEquipo = nombreEquipo;
+    public Equipo(){
+        ciclistas = new ArrayList<>();
+    }
+    public Equipo(String nombre, String nombreDirector) {
+        this.nombre = nombre;
         this.nombreDirector = nombreDirector;
     }
 
@@ -30,12 +34,12 @@ public class Equipo {
         this.ciclistas = ciclistas;
     }
 
-    public String getNombreEquipo() {
-        return nombreEquipo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreEquipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
+    public void setNombre(String nombre) {
+        this.nombre= nombre;
     }
 
     public String getNombreDirector() {

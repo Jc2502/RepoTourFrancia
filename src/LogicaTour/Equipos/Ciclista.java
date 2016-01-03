@@ -15,6 +15,9 @@ public class Ciclista {
     private String nombreEquipo;
     private String dni;
     
+    public Ciclista(){
+        
+    }
     public Ciclista(String nombre, String apellidos, int dorsal, String nombreEquipo, String dni){
         this.nombre = nombre;
         this.apellidos = apellidos;

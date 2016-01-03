@@ -11,14 +11,18 @@ package LogicaTour.Etapas;
  */
 public class Puerto implements InterfazTerreno {
     private String nombre;
-    private String alturaMaxima;
+    private int alturaMaxima;
     private String categoria;
     private int dorsalGanador;
 
-    public Puerto(String nombre, String alturaMaxima, String categoria) {
+    public Puerto(String nombre, int alturaMaxima, String categoria) {
         this.nombre = nombre;
         this.alturaMaxima = alturaMaxima;
         this.categoria = categoria;
+    }
+
+    public Puerto() {
+
     }
 
     public String getNombre() {
@@ -29,11 +33,11 @@ public class Puerto implements InterfazTerreno {
         this.nombre = nombre;
     }
 
-    public String getAlturaMaxima() {
+    public int getAlturaMaxima() {
         return alturaMaxima;
     }
 
-    public void setAlturaMaxima(String alturaMaxima) {
+    public void setAlturaMaxima(int alturaMaxima) {
         this.alturaMaxima = alturaMaxima;
     }
 
