@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:bean xmlns="http://www.springframework.org/schema/security"
+xmlns:beans="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:jee="http://www.springframework.org/schema/jee"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.1.xsd
+http://www.springframework.org/schema/jee
+http://www.springframework.org/schema/jee/spring-jee.xsd">
+ 
+<!-- No usar Spring Security para esta URL (ya que es la página de Login) -->
+<http pattern="/springLogin*" security="none"/>
+ 
+<!-- Configuración básica, usando un formulario para el Login -->
+<http auto-config='true'>
+  <!-- Es necesario tener el rol ROLE_USER para acceder a cualquier URL -->
+  <intercept-url pattern="/**" access="ROLE_USER" />
+  <!-- Se indica la página donde se creará el formulario, la página de bienvenida y la de Logout -->
+  <form-login login-page='/springLogin.jsp' default-target-url='/spring.jsp'
+      always-use-default-target='true'/>
+  <logout logout-success-url="/springLogin.jsp"/>
+</http>
+ 
+<!-- Datasource -->
+<jee:jndi-lookup id="dataSource" jndi-name="jdbc/BBDDTour" resource-ref="true"/>
+ 
+<!-- Se usan las siguientes queries sobre el Datasource referenciado para obtener los usuarios almacenados y sus grupos -->
+<jdbc-user-service id="userService"
+   data-source-ref="dataSource"
+   users-by-username-query="select username,password,enabled from users where username=?"
+   authorities-by-username-query=
+   "select r.username,r.rolename from roles r, users u where r.username=u.username and u.username=?"/>
+ 
+<!-- Gestor de autenticación -->
+<authentication-manager>
+  <authentication-provider user-service-ref="userService"/>
+</authentication-manager>
+ 
+</beans:bean>

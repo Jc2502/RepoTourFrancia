@@ -1,8 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
-
 <!--fonts-->
 <link href='//fonts.googleapis.com/css?family=Francois+One'
 	rel='stylesheet' type='text/css'>
@@ -91,21 +91,16 @@
 		<div class="clearfix"></div>
 		</div>
 </div>
-<!-- banner -->
-<!-- 404 -->
-<div class="error">
-	 <div class="container">
-		  <div class="error-main">
-				<h3>404<span>error</span>
-				<h5>Page not found</h5>
-				<p>We are sorry but the page you are looking for does not exit.
-				You could return to the homepage</p>
-				<a href="../../index.html">BACK TO HOME</a>
-		 </div>
-	 </div>
-</div>
-<!-- //404 -->
-<!--footer-->
+<form:form id="loginForm" method="post" action="login" commandName="loginBean">
+
+            <form:label path="username">Enter your user-name</form:label>
+            <form:input id="username" name="username" path="username" /><br>
+            <form:label path="username">Please enter your password</form:label>
+            <form:password id="password" name="password" path="password" /><br>
+           <input type="submit" value="Submit" />
+        </form:form>
+
+
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">

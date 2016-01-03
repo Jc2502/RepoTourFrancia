@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path=""/>
+ <Resource name="jdbc/BBDDTour" auth="Container"
+type="javax.sql.DataSource" driverClassName="sun.jdbc.odbc.JdbcOdbcDriver"
+url="jdbc:odbc:OrigenDatos"
+username="admin" password="1234"
+maxActive="100" maxIdle="30" maxWait="10000"/>
