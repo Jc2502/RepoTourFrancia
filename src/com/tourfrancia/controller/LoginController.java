@@ -37,12 +37,12 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("loginBean") LoginBean loginBean) {
-      
+
         ModelAndView model = null;
         try {
             boolean isValidUser = loginDelegate.isValidUser(loginBean.getUsername(), loginBean.getPassword());
             if (isValidUser) {
-                
+
                 modelMap.addAttribute("loggedInUser", loginBean.getUsername());
                 if (loginBean.getUsername().equals("admin")) {
                     System.out.println("admin Login Successful");
@@ -54,7 +54,7 @@ public class LoginController {
                     model = new ModelAndView("index");
                 }
             } else {
-                
+
                 modelMap.addAttribute("loggedInUser", "null");
                 model = new ModelAndView("login");
                 request.setAttribute("message", "Invalid credentials!!");
@@ -106,7 +106,7 @@ public class LoginController {
 
     @RequestMapping(value = "/ciclistas", method = RequestMethod.POST)
     public ModelAndView showCicInfo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("ciclistaBean") Ciclista ciclistaBean) {
-       if (modelMap.get("loggedInUser").equals("null")) {
+        if (modelMap.get("loggedInUser").equals("null")) {
             return null;
         }
         ModelAndView model = null;
@@ -199,7 +199,7 @@ public class LoginController {
 
     @RequestMapping("/index")
     public ModelAndView goToIndex(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
-           if (modelMap.get("loggedInUser").equals("null")) {
+        if (modelMap.get("loggedInUser").equals("null")) {
             return null;
         }
         return new ModelAndView("index");
@@ -207,7 +207,7 @@ public class LoginController {
 
     @RequestMapping(value = "/puertos", method = RequestMethod.GET)
     public ModelAndView goToPuertos(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
-           if (modelMap.get("loggedInUser").equals("null")) {
+        if (modelMap.get("loggedInUser").equals("null")) {
             return null;
         }
         return new ModelAndView("puertos");
@@ -215,7 +215,7 @@ public class LoginController {
 
     @RequestMapping("/etapas")
     public ModelAndView goToEtapas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
-         if (modelMap.get("loggedInUser").equals("null")) {
+        if (modelMap.get("loggedInUser").equals("null")) {
             return null;
         }
         return new ModelAndView("etapas");
@@ -223,7 +223,7 @@ public class LoginController {
 
     @RequestMapping("/contacto")
     public ModelAndView goToContacto(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
-         if (modelMap.get("loggedInUser").equals("null")) {
+        if (modelMap.get("loggedInUser").equals("null")) {
             return null;
         }
         return new ModelAndView("contacto");
@@ -233,50 +233,85 @@ public class LoginController {
     public ModelAndView goToEquipos(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
         if (modelMap.get("loggedInUser").equals("null")) {
             return null;
-        }
-        else{
-        request.setAttribute("listaEquipos", proxyTour.getEquipos());
-        return new ModelAndView("equipos");
+        } else {
+            request.setAttribute("listaEquipos", proxyTour.getEquipos());
+            return new ModelAndView("equipos");
         }
     }
 
     @RequestMapping(value = "/ciclistas", method = RequestMethod.GET)
     public ModelAndView goToCiclistas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
-          if (modelMap.get("loggedInUser").equals("null")) {
+        if (modelMap.get("loggedInUser").equals("null")) {
             return null;
+        } else {
+            ModelAndView model = new ModelAndView("ciclistas");
+            request.setAttribute("listaCiclistas", proxyTour.getCiclistas());
+            return model;
         }
-        else{
-        ModelAndView model = new ModelAndView("ciclistas");
-        request.setAttribute("listaCiclistas", proxyTour.getCiclistas());
-        return model;}
     }
 
-    
-    
-    
-    
-    
-    
-    /*******************************************ADMIN ZONE*************************************************************/
-    @RequestMapping(value = "/addCiclistas", method = RequestMethod.GET)
+    /**
+     * *****************************************ADMIN
+     * ZONE************************************************************
+     */
+    @RequestMapping(value = "/modifyCiclistas", method = RequestMethod.GET)
     public ModelAndView goToAddCiclistas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
 
-    if (!modelMap.get("loggedInUser").equals("admin")) {
+        if (!modelMap.get("loggedInUser").equals("admin")) {
             return null;
-        }  
-     
-        return new ModelAndView("admin/addCiclistas");
- 
+        }
+        request.setAttribute("listaCiclistas", proxyTour.getCiclistas());
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        return new ModelAndView("admin/modifyCiclistas");
+
     }
 
-    @RequestMapping(value = "/addEquipo", method = RequestMethod.GET)
-    public ModelAndView goToAddEquipo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
-           if (!modelMap.get("loggedInUser").equals("admin")) {
+    @RequestMapping(value = "/loadCiclista", method = RequestMethod.POST)
+    public ModelAndView addCiclista(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("ciclistaBean") Ciclista ciclistaBean) {
+        Ciclista ciclista = null;
+        if (!modelMap.get("loggedInUser").equals("admin")) {
             return null;
-        }  
-     
-        return new ModelAndView("admin/addEquipo");
-     
+        }
+        if (request.getParameter("submit").equals("Remove")) {
+            if (proxyTour.existeCiclista(ciclistaBean.getNombre())) {
+                proxyTour.rmCiclista(ciclistaBean.getNombre());
+
+            }
+        } else if (request.getParameter("submit").equals("Update")) {
+            if (proxyTour.existeCiclista(ciclistaBean.getNombre())) {
+                ciclista = proxyTour.getCiclista(ciclistaBean.getNombre());
+                if (ciclistaBean.getNombreEquipo() != null) {
+                    ciclista.setNombreEquipo(ciclistaBean.getNombreEquipo());
+                    proxyTour.modCiclistaEquipo(ciclista.getNombre(), ciclista.getNombreEquipo());
+                }
+            } else {
+                proxyTour.addCiclistaEquipo(ciclistaBean.getNombre(), ciclistaBean.getNombreEquipo());
+            }
+        }
+        request.setAttribute("listaCiclistas", proxyTour.getCiclistas());
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        request.setAttribute("ciclista", proxyTour.getCiclista(ciclistaBean.getNombre()));
+        return new ModelAndView("admin/modifyCiclistas");
+    }
+
+    @RequestMapping(value = "/addEquipos", method = RequestMethod.GET)
+    public ModelAndView goToAddEquipo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+        if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }
+
+        return new ModelAndView("admin/addEquipos");
+
+    }
+
+    @RequestMapping(value = "/indexPage", method = RequestMethod.GET)
+    public ModelAndView goToIndexPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+        if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }
+
+        return new ModelAndView("admin/indexPage");
+
     }
 
 }

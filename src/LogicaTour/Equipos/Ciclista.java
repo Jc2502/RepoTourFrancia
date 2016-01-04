@@ -10,20 +10,18 @@ package LogicaTour.Equipos;
  * @author carlo_000
  */
 public class Ciclista {
-    private String nombre, apellidos;
+    private String nombre;
     private int dorsal;
     private String nombreEquipo;
-    private String dni;
     
     public Ciclista(){
         
     }
-    public Ciclista(String nombre, String apellidos, int dorsal, String nombreEquipo, String dni){
+    public Ciclista(String nombre, int dorsal, String nombreEquipo){
         this.nombre = nombre;
-        this.apellidos = apellidos;
         this.dorsal = dorsal;
         this.nombreEquipo = nombreEquipo;
-        this.dni = dni;
+  
     }    
     
     public String getNombre() {
@@ -32,14 +30,6 @@ public class Ciclista {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public int getDorsal() {
@@ -56,14 +46,5 @@ public class Ciclista {
 
     public void setNombreEquipo(String nombreEquipo) {
         this.nombreEquipo = nombreEquipo;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-    
+    }    
 }

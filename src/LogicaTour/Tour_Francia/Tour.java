@@ -43,7 +43,7 @@ public class Tour implements InterfazTour {
             Class.forName(("sun.jdbc.odbc.JdbcOdbcDriver"));
 
             c = DriverManager.getConnection("jdbc:odbc:OrigenDatos", "", "");
-            s = c.createStatement();
+            s = c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             rs = s.executeQuery("SELECT * FROM Equipo");
             while (rs.next()) {
@@ -54,9 +54,6 @@ public class Tour implements InterfazTour {
                 equipo.setNombre(nombre_equipo);
                 equipo.setNombreDirector(director);
                 equipos.put(nombre_equipo, equipo);
-
-                System.out.println(equipo.getNombre());
-                System.out.println(equipo.getNombreDirector());
             }
 
             rs = s.executeQuery("SELECT * FROM Ciclista");
@@ -143,15 +140,24 @@ public class Tour implements InterfazTour {
     }
 
     @Override
-    public void addCiclistaEquipo(String nombre, String apellidos, String dni, String nombreEquipo) {
+    public void addCiclistaEquipo(String nombre, String nombreEquipo) {
         if (!existeEquipo(nombreEquipo)) {
             System.out.println("NO HAY EQUIPO");//Throwear algo
-        } else if (existeCiclista(dni)) {
+        } else if (existeCiclista(nombre)) {
             System.out.println("YA EXISTE");//Throwear algo
         } else {
-            Ciclista ciclista = new Ciclista(nombre, apellidos, siguienteDorsal(), nombreEquipo, dni);
-            ciclistas.put(dni, ciclista);
+
+            System.out.println("INSERTANDO");
+            Ciclista ciclista = new Ciclista(nombre, siguienteDorsal(), nombreEquipo);
+            ciclistas.put(nombre, ciclista);
             equipos.get(nombreEquipo).getCiclistas().add(ciclista);
+            try {
+                System.out.println("INSERT INTO Ciclista (nombre, numero_dorsal, nombre_equipo) VALUES('" + ciclista.getNombre() + "'," + ciclista.getDorsal() + ",'" + ciclista.getNombreEquipo() + "')");
+
+                s.executeUpdate("INSERT INTO Ciclista VALUES('" + ciclista.getNombre() + "','" + ciclista.getDorsal() + "','" + ciclista.getNombreEquipo() + "')");
+            } catch (SQLException ex) {
+                Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -195,28 +201,32 @@ public class Tour implements InterfazTour {
 
     }
 
-    private boolean existeCiclista(String DNI) {
-        return ciclistas.containsKey(DNI);
+    @Override
+    public boolean existeCiclista(String nombre) {
+        return ciclistas.containsKey(nombre);
     }
 
-    private boolean existeEtapa(int numeroEtapa) {
+    @Override
+    public boolean existeEtapa(int numeroEtapa) {
         return etapas.containsKey(numeroEtapa);
     }
 
-    private boolean existeEquipo(String nombreEquipo) {
+    @Override
+    public boolean existeEquipo(String nombreEquipo) {
         return equipos.containsKey(nombreEquipo);
     }
 
     private int siguienteDorsal() {
         int ret = 1;
-        try {
-            rs = s.executeQuery("SELECT max(dorsal)+1 FROM Ciclistas");
-            ret = rs.getInt(1);
-        } catch (SQLException ex) {
-            Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return ret;
+
+        for (Map.Entry<String, Ciclista> entry : ciclistas.entrySet()) {
+            String key = entry.getKey();
+            Ciclista value = entry.getValue();
+            if (value.getDorsal() > ret) {
+                ret = value.getDorsal();
+            }
         }
+        return ret + 1;
 
     }
 
@@ -225,11 +235,11 @@ public class Tour implements InterfazTour {
         return equipos.get(nombreEquipo);
     }
 
+    @Override
     public Ciclista getCiclista(String nombreCiclista) {
         for (Map.Entry<String, Ciclista> entry : ciclistas.entrySet()) {
             String key = entry.getKey();
             Ciclista value = entry.getValue();
-            System.out.println(key + " " + value.getNombreEquipo());
 
         }
         return ciclistas.get(nombreCiclista);
@@ -291,5 +301,27 @@ public class Tour implements InterfazTour {
             }
         }
         return ret;
+    }
+
+    @Override
+    public void rmCiclista(String nombre) {
+        try {
+            ciclistas.remove(nombre);
+            s.executeUpdate("DELETE FROM Ganador_Etapa WHERE numero_dorsal = (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Ganador_Puerto WHERE numero_dorsal = (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Portador_Maillot WHERE numero_dorsal = (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Ciclista WHERE nombre = '" + nombre + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void modCiclistaEquipo(String nombre, String nombreEquipo) {
+        try {
+            rs = s.executeQuery("UPDATE Ciclista SET nombre_equipo = '" + nombreEquipo + "' WHERE nombre = '" + nombre + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

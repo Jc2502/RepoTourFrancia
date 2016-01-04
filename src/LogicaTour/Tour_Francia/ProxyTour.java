@@ -18,22 +18,22 @@ import java.util.List;
 public class ProxyTour implements InterfazTour {
 
     private Tour tour = new Tour();
-    
+
     @Override
     public void addEquipo(String nombreEquipo, String nombreDirector) {
         tour.addEquipo(nombreEquipo, nombreDirector);
     }
-    
+
     @Override
-    public void addCiclistaEquipo(String nombre, String apellidos, String DNI, String nombreEquipo) {
-        tour.addCiclistaEquipo(nombre, apellidos, DNI, nombreEquipo);
+    public void addCiclistaEquipo(String nombre, String nombreEquipo) {
+        tour.addCiclistaEquipo(nombre, nombreEquipo);
     }
-    
+
     @Override
     public void addEtapa(int numeroEtapa, int numeroKilometros, String ciudadOrigen, String ciudadDestino) {
         tour.addEtapa(numeroEtapa, numeroKilometros, ciudadOrigen, ciudadDestino);
     }
-    
+
     @Override
     public void addPuertoEtapa(int numeroEtapa, String nombre, int alturaMaxima, String categoria) {
         tour.addPuertoEtapa(numeroEtapa, nombre, alturaMaxima, categoria);
@@ -62,7 +62,8 @@ public class ProxyTour implements InterfazTour {
     @Override
     public List<Puerto> getPuertos() {
         return tour.getPuertos();
-    }   
+    }
+
     @Override
     public List<Etapa> getEtapas() {
         return tour.getEtapas();
@@ -70,7 +71,34 @@ public class ProxyTour implements InterfazTour {
 
     @Override
     public List<Puerto> getPuertos(String categoria) {
-            return tour.getPuertos(categoria);
+        return tour.getPuertos(categoria);
     }
-    
+
+    @Override
+
+    public boolean existeCiclista(String nombre) {
+        return tour.existeCiclista(nombre);
+    }
+
+    @Override
+
+    public boolean existeEtapa(int numeroEtapa) {
+        return tour.existeEtapa(numeroEtapa);
+    }
+
+    @Override
+
+    public boolean existeEquipo(String nombreEquipo) {
+        return tour.existeEquipo(nombreEquipo);
+    }
+
+    @Override
+    public void rmCiclista(String nombre) {
+        tour.rmCiclista(nombre);
+    }
+
+    @Override
+    public void modCiclistaEquipo(String nombre, String nombreEquipo) {
+        tour.modCiclistaEquipo(nombre, nombreEquipo);
+    }
 }
