@@ -18,8 +18,11 @@ import com.tourfrancia.delegate.LoginDelegate;
 import com.tourfrancia.viewBean.LoginBean;
 import java.util.ArrayList;
 import java.util.Iterator;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("loggedInUser")
 public class LoginController {
 
     @Autowired
@@ -29,26 +32,30 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView displayLogin(HttpServletRequest request, HttpServletResponse response, LoginBean loginBean) {
         ModelAndView model = new ModelAndView("login");
-        // model.addObject("loginBean", loginBean);
         return model;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("loginBean") LoginBean loginBean) {
+    public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("loginBean") LoginBean loginBean) {
+      
         ModelAndView model = null;
         try {
             boolean isValidUser = loginDelegate.isValidUser(loginBean.getUsername(), loginBean.getPassword());
             if (isValidUser) {
+                
+                modelMap.addAttribute("loggedInUser", loginBean.getUsername());
                 if (loginBean.getUsername().equals("admin")) {
                     System.out.println("admin Login Successful");
-                    request.setAttribute("loggedInUser", loginBean.getUsername());
+                    request.setAttribute("loggedInUser", modelMap.get("loggedInUser"));
                     model = new ModelAndView("admin/indexPage");
                 } else {
                     System.out.println("User Login Successful");
-                    request.setAttribute("loggedInUser", loginBean);
+                    request.setAttribute("loggedInUser", modelMap.get("loggedInUser"));
                     model = new ModelAndView("index");
                 }
             } else {
+                
+                modelMap.addAttribute("loggedInUser", "null");
                 model = new ModelAndView("login");
                 request.setAttribute("message", "Invalid credentials!!");
             }
@@ -66,7 +73,10 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/equipos", method = RequestMethod.POST)
-    public ModelAndView showTeamInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("equipoBean") Equipo equipoBean) {
+    public ModelAndView showTeamInfo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("equipoBean") Equipo equipoBean) {
+        if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
         ModelAndView model = null;
         try {
             System.out.println(equipoBean.getNombre());
@@ -95,7 +105,10 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/ciclistas", method = RequestMethod.POST)
-    public ModelAndView showCicInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("ciclistaBean") Ciclista ciclistaBean) {
+    public ModelAndView showCicInfo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("ciclistaBean") Ciclista ciclistaBean) {
+       if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
         ModelAndView model = null;
         try {
             System.out.println(ciclistaBean.getNombre());
@@ -126,7 +139,10 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/puertos", method = RequestMethod.POST)
-    public ModelAndView showPuertoInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("puertoBean") Puerto puertoBean) {
+    public ModelAndView showPuertoInfo(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("puertoBean") Puerto puertoBean, ModelMap modelMap) {
+        if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
         ModelAndView model = null;
         try {
             double media = 0;
@@ -182,54 +198,85 @@ public class LoginController {
     }
 
     @RequestMapping("/index")
-    public ModelAndView goToIndex() {
+    public ModelAndView goToIndex(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+           if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
         return new ModelAndView("index");
     }
 
     @RequestMapping(value = "/puertos", method = RequestMethod.GET)
-    public ModelAndView goToPuertos(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView goToPuertos(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+           if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
         return new ModelAndView("puertos");
     }
 
     @RequestMapping("/etapas")
-    public ModelAndView goToLaCarrera() {
+    public ModelAndView goToEtapas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+         if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
         return new ModelAndView("etapas");
     }
 
     @RequestMapping("/contacto")
-    public ModelAndView goToContacto() {
+    public ModelAndView goToContacto(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+         if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
         return new ModelAndView("contacto");
     }
 
     @RequestMapping(value = "/equipos", method = RequestMethod.GET)
-    public ModelAndView goToEquipos(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView goToEquipos(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+        if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
+        else{
         request.setAttribute("listaEquipos", proxyTour.getEquipos());
         return new ModelAndView("equipos");
+        }
     }
 
     @RequestMapping(value = "/ciclistas", method = RequestMethod.GET)
-    public ModelAndView goToCiclistas(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView goToCiclistas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+          if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
+        else{
         ModelAndView model = new ModelAndView("ciclistas");
         request.setAttribute("listaCiclistas", proxyTour.getCiclistas());
-        return model;
+        return model;}
     }
 
+    
+    
+    
+    
+    
+    
+    /*******************************************ADMIN ZONE*************************************************************/
     @RequestMapping(value = "/addCiclistas", method = RequestMethod.GET)
-    public ModelAndView goToAddCiclistas(HttpServletRequest request, HttpServletResponse response) {
-//        if (request.getAttribute("loggedInUser").equals("admin")) {
+    public ModelAndView goToAddCiclistas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+
+    if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }  
+     
         return new ModelAndView("admin/addCiclistas");
-        // } else {
-        //      return null;
-        //  }
+ 
     }
 
     @RequestMapping(value = "/addEquipo", method = RequestMethod.GET)
-    public ModelAndView goToAddEquipo(HttpServletRequest request, HttpServletResponse response, String loggedInUser) {
-        //   if (loggedInUser.equals("admin")) {
+    public ModelAndView goToAddEquipo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+           if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }  
+     
         return new ModelAndView("admin/addEquipo");
-        //   } else {
-        //       return null;
-        //   }
+     
     }
 
 }
