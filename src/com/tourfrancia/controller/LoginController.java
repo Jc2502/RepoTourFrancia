@@ -45,7 +45,7 @@ public class LoginController {
                     model = new ModelAndView("admin/indexPage");
                 } else {
                     System.out.println("User Login Successful");
-                    request.setAttribute("loggedInUser", loginBean.getUsername());
+                    request.setAttribute("loggedInUser", loginBean);
                     model = new ModelAndView("index");
                 }
             } else {
@@ -75,7 +75,7 @@ public class LoginController {
             if (equipoBean != null) {
                 System.out.println("Successful");
                 request.setAttribute("ciclistas", equipoBean.getCiclistas());
-                request.setAttribute("equipo", equipoBean.getNombre());
+                request.setAttribute("equipo", equipoBean);
                 model = new ModelAndView("equipos");
             } else {
                 System.out.println("FAIL");

@@ -47,7 +47,7 @@
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="">LE TOUR</a></h1>
+			   <h1><a href="">Le France Tour</a></h1>
 		 </div>	
 		 <div class="top-menu">
 			 <span class="menu"></span>
@@ -66,18 +66,20 @@
 </div>
 <!-- //header -->
 <!-- banner -->
+<div class="strip">
 <div class="container">
+   
 <form:form id="loginForm" method="post" action="login" commandName="loginBean">
-
-            <form:label path="username">Enter your user-name</form:label>
+    <br>
+            <form:label path="username">Enter your user-name       </form:label>
             <form:input id="username" name="username" path="username" /><br>
-            <form:label path="username">Please enter your password</form:label>
+            <form:label path="username">Please enter your password </form:label>
             <form:password id="password" name="password" path="password" /><br>
-           <input type="submit" value="Submit" />
+            <form:input type="submit" value="Submit" path=""></form:input>
         </form:form>
 </div>
-
-<h4>${message}</h4>
+</div>
+<h2>${message}</h2>
 
 <div class="footer">
 	 <div class="container">
@@ -85,14 +87,6 @@
 			 <p>© 2015 Soccer. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a> </p>
 		 </div>
 		 <div class="footer-menu">
-		<!--	 <ul>
-				 <li><a href="index.html">INICIO</a></li>
-				 <li><a href="galeria.html">GALERIA</a></li>
-				 <li><a href="laCarrera.html">LA CARRERA</a></li>
-				 <li><a href="entrenamientos.html">ENTRENAMIENTOS</a></li>
-				 <li><a href="noticias.html">NOTICIAS & EVENTOS</a></li>
-				 <li><a href="contacto.html">CONTACTO</a></li>
-			 </ul>-->
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>

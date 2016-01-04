@@ -33,7 +33,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">LeTour de Francia</a></h1>
+			   <h1><a href="index.html">Le France Tour</a></h1>
 		 </div>	
 		 <div class="top-menu">
 			 <span class="menu"></span>
@@ -66,7 +66,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	 <div class="search">
 		    <form>
 		    	<input type="text" value="" placeholder="Buscar...">
-				<input type="submit" value="">
+                        <input type="submit" value="">
 			</form>
      </div>     
 	 <div class="social">			 

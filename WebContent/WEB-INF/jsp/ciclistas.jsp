@@ -48,7 +48,7 @@
         <div class="header">
             <div class="container">
                 <div class="logo">
-                    <h1><a href="index.html">SOCCER</a></h1>
+                    <h1><a href="index.html">Le France Tour</a></h1>
                 </div>	
                 <div class="top-menu">
                     <span class="menu"></span>
@@ -75,45 +75,61 @@
         </div>
         <!-- //header -->
         <!-- banner -->
-        <div class="container">
-
-            <div class="search">
-
-                <form:form method="POST" commandName="ciclistaBean">
-                    <table>
-                        <tr>
-                            <td>Please select:</td>
-                            <td><form:select path="nombre">
-                                    <form:option value="" label="...." />
-                                    <form:options items="${listaCiclistas}" />
-                                </form:select>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="submit" name="submit" value="Submit"></td>
-                        </tr>
-                        <tr>
-                    </table>
-                </form:form>
+        <div class="strip">
+            <div class="container">
+                <div class="dropdown">
+                    <form:form method="POST" commandName="ciclistaBean">
+                        <table>
+                            <tr>
+                                <td>Please select:</td>
+                                <td><form:select path="nombre">
+                                        <ul class="dropdown-menu">
+                                            <li><form:option value="" label="...." /></li>
+                                            <li><form:options items="${listaCiclistas}" /></li>
+                                        </ul>
+                                    </form:select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" name="submit" value="Submit"></td>
+                            </tr>
+                            <tr>
+                        </table>
+                    </form:form>
+                </div>
             </div>
-
-
         </div>
-
 
         <br>
         <br>
         <br>
         <div class="container">
-            Datos del ciclista
-            <ul>
-                <li>NOMBRE: ${nombre}<p></li>
-                <li>EQUIPO: ${equipo}<p></li>
-                <li>DORSAL: ${dorsal}<p></li>
-
-            </ul>
+            <h2>Datos del ciclista</h2>
+            <p></p>            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h4>Nombre</h4></td>
+                        <td>${nombre}</td>
+                    </tr>
+                    <tr>
+                        <td><h4>Equipo</td>
+                        <td>${equipo}</td>
+                    </tr>
+                    <tr>
+                        <td><h4>Dorsal</td>
+                        <td>${dorsal}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
         <!-- banner -->
 
         <!--footer-->
@@ -125,10 +141,10 @@
                 <div class="footer-menu">
                     <ul>
                         <li><a href="index.html">INICIO</a></li>
-                        <li><a href="galeria.html">GALERIA</a></li>
-                        <li><a href="laCarrera.html">LA CARRERA</a></li>
-                        <li><a href="entrenamientos.html">ENTRENAMIENTOS</a></li>
-                        <li><a href="noticias.html">NOTICIAS & EVENTOS</a></li>
+                        <li><a href="ciclistas.html">CICLISTAS</a></li>
+                        <li><a href="equipos.html">LOS EQUIPOS</a></li>
+                        <li><a href="etapas.html">LAS ETAPAS</a></li>
+                        <li><a href="puertos.html">LOS PUERTOS</a></li>
                         <li><a href="contacto.html">CONTACTO</a></li>
                     </ul>
                 </div>

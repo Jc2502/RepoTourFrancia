@@ -246,11 +246,10 @@ public class Tour implements InterfazTour {
     }
 
     @Override
-    public List<String> getEquipos() {
+    public List<Equipo> getEquipos() {
         ArrayList ret = new ArrayList();
         for (Map.Entry<String, Equipo> entry : equipos.entrySet()) {
-            String key = entry.getKey();
-            ret.add(key);
+            ret.add(entry.getValue());
         }
         return ret;
     }

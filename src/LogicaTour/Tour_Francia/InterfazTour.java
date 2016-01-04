@@ -23,7 +23,7 @@ public interface InterfazTour {
     public Equipo getEquipo(String nombreEquipo);
     public Ciclista getCiclista(String nombreCiclista);
     public List<String> getCiclistas();
-    public List<String> getEquipos();
+    public List<Equipo> getEquipos();
     public List<Puerto> getPuertos();
     public List<Puerto> getPuertos(String categoria);
     public List<Etapa> getEtapas();

@@ -52,12 +52,13 @@
 		 <div class="top-menu">
 			 <span class="menu"></span>
 			  <ul>
-				 <li><a href="index.html">INICIO</a></li>
-				 <li class="active"><a href="galeria.html">GALERIA</a></li>
-				 <li><a href="laCarrera.html">LA CARRERA</a></li>
-                                 <li><a href="entrenamientos.html">ENTRENAMIENTOS</a></li>
-				 <li><a href="noticias.html">NOTICIAS & EVENTOS</a></li>
-				 <li><a href="contacto.html">CONTACTO</a></li>
+                       <li class="active"><a href="index.html">INICIO</a></li>
+                        <li><a href="ciclistas.html">CICLISTAS</a></li>
+                        <li><a href="equipos.html">LOS EQUIPOS</a></li>
+                        <li><a href="etapas.html">LAS ETAPAS</a></li>
+                        <li><a href="puertos.html">LOS PUERTOS</a></li>
+                        <li><a href="contacto.html">CONTACTO</a></li>
+                        <li><a>Bienvenido ${loggedInUser} </a></li>
 			 </ul>			 
 		 </div>
 		 <!-- script-for-menu -->
@@ -100,7 +101,7 @@
 				<h5>Page not found</h5>
 				<p>We are sorry but the page you are looking for does not exit.
 				You could return to the homepage</p>
-				<a href="../../index.html">BACK TO HOME</a>
+				<a href="index.html">BACK TO HOME</a>
 		 </div>
 	 </div>
 </div>
@@ -113,12 +114,12 @@
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
-				 <li><a href="index.html">INICIO</a></li>
-				 <li><a href="galeria.html">GALERIA</a></li>
-				 <li><a href="laCarrera.html">LA CARRERA</a></li>
-				 <li><a href="entrenamientos.html">ENTRENAMIENTOS</a></li>
-				 <li><a href="noticias.html">NOTICIAS & EVENTOS</a></li>
-				 <li><a href="contacto.html">CONTACTO</a></li>
+                       <li class="active"><a href="index.html">INICIO</a></li>
+                        <li><a href="ciclistas.html">CICLISTAS</a></li>
+                        <li><a href="equipos.html">LOS EQUIPOS</a></li>
+                        <li><a href="etapas.html">LAS ETAPAS</a></li>
+                        <li><a href="puertos.html">LOS PUERTOS</a></li>
+                        <li><a href="contacto.html">CONTACTO</a></li>
 			 </ul>
 		 </div>
 		 <div class="clearfix"></div>

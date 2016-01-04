@@ -55,7 +55,7 @@ public class ProxyTour implements InterfazTour {
     }
 
     @Override
-    public List<String> getEquipos() {
+    public List<Equipo> getEquipos() {
         return tour.getEquipos();
     }
 
