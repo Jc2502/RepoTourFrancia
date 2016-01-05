@@ -60,6 +60,7 @@
                         <li><a href="puertos.html">LOS PUERTOS</a></li>
                         <li><a href="contacto.html">CONTACTO</a></li>
                         <li><a>Bienvenido ${loggedInUser} </a></li>
+                        <li><a href="logout">Cerrar Sesion</a></li>
                     </ul>			 
                 </div>
                 <!-- script-for-menu -->

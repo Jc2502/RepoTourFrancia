@@ -55,6 +55,8 @@
 				 <li><a href="indexPage.html">INICIO</a></li>
 				 <li class="active"><a href="modifyEquipos.html">Añadir Equipos</a></li>
                                  <li><a href="modifyCiclistas.html">Añadir Ciclistas</a></li>
+                                 <li><a href="logout">Cerrar Sesion</a></li>
+                                 
 			 </ul>			 
 		 </div>
 		 <!-- script-for-menu -->

@@ -61,14 +61,15 @@
                         <li><a href="puertos.html">LOS PUERTOS</a></li>
                         <li><a href="contacto.html">CONTACTO</a></li>
                         <li><a>Bienvenido ${loggedInUser} </a></li>
+                        <li><a href="logout">Cerrar Sesion</a></li>
                     </ul>			 
                 </div>
                 <!-- script-for-menu -->
                 <script>
-$("span.menu").click(function () {
-    $(".top-menu ul").slideToggle("slow", function () {
-    });
-});
+                    $("span.menu").click(function () {
+                        $(".top-menu ul").slideToggle("slow", function () {
+                        });
+                    });
                 </script>
                 <!-- script-for-menu -->
                 <div class="clearfix"></div>
@@ -120,26 +121,26 @@ $("span.menu").click(function () {
         <br>
         <div class="container">     
             <h2>Listado de Puertos</h2>
-                <table class="table">
-                    <thead>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Altura</th>
+                        <th>Categoria</th>
+                        <th>Dorsal Ganador</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${listadoPuertos}">    
                         <tr>
-                            <th>Nombre</th>
-                            <th>Altura</th>
-                            <th>Categoria</th>
-                            <th>Dorsal Ganador</th>
+                            <td>${i.nombre}</td>
+                            <td>${i.alturaMaxima}</td>
+                            <td>${i.categoria}</td>
+                            <td>${i.dorsalGanador}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="i" items="${listadoPuertos}">    
-                            <tr>
-                                <td>${i.nombre}</td>
-                                <td>${i.alturaMaxima}</td>
-                                <td>${i.categoria}</td>
-                                <td>${i.dorsalGanador}</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                    </c:forEach>
+                </tbody>
+            </table>
         </div>
         <!-- //404 -->
         <!--footer-->

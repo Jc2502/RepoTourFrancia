@@ -358,5 +358,13 @@ public class LoginController {
         return new ModelAndView("admin/indexPage");
 
     }
+    
+     @RequestMapping(value = "/logout")
+     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap){
+         
+         modelMap.addAttribute("loggedInUser", "null");
+         
+         return new ModelAndView("login");
+     }
 
 }
