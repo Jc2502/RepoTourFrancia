@@ -294,16 +294,61 @@ public class LoginController {
         return new ModelAndView("admin/modifyCiclistas");
     }
 
-    @RequestMapping(value = "/addEquipos", method = RequestMethod.GET)
+    @RequestMapping(value = "/modifyEquipos", method = RequestMethod.GET)
     public ModelAndView goToAddEquipo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
         if (!modelMap.get("loggedInUser").equals("admin")) {
             return null;
         }
-
-        return new ModelAndView("admin/addEquipos");
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        return new ModelAndView("admin/modifyEquipos");
 
     }
 
+    @RequestMapping(value = "/modEquipo", method = RequestMethod.POST)
+    public ModelAndView addEquipo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("equipoBean") Equipo equipoBean) {
+        Equipo equipo = null;
+        if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }
+        if (request.getParameter("submit").equals("Remove")) {
+            if (proxyTour.existeEquipo(equipoBean.getNombre())) {
+                proxyTour.rmEquipo(equipoBean.getNombre());
+                equipoBean.setNombreDirector("");
+                equipoBean.setNombre("");
+            }
+        } else if (request.getParameter("submit").equals("Update")) {
+            if (proxyTour.existeEquipo(equipoBean.getNombre())) {
+                if (equipoBean.getNombre() != null) {
+                    proxyTour.modDirecEquipo(equipoBean.getNombre(), equipoBean.getNombreDirector());
+                    equipoBean.setNombreDirector(proxyTour.getEquipo(equipoBean.getNombre()).getNombreDirector());
+                }
+            } else {
+                proxyTour.addEquipo(equipoBean.getNombre(), equipoBean.getNombreDirector());
+
+            }
+        }
+        
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        return new ModelAndView("admin/modifyEquipos");
+    }
+    
+    @RequestMapping(value = "/loadEquipo", method = RequestMethod.POST)
+    public ModelAndView loadEquipo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("equipoBean") Equipo equipoBean) {
+        Equipo equipo = null;
+        if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }
+            
+        if (!equipoBean.getNombre().equals("")) {
+               equipoBean.setNombreDirector(proxyTour.getEquipo(equipoBean.getNombre()).getNombreDirector());
+        }
+
+        
+        
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        return new ModelAndView("admin/modifyEquipos");
+    }
+    
     @RequestMapping(value = "/indexPage", method = RequestMethod.GET)
     public ModelAndView goToIndexPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
         if (!modelMap.get("loggedInUser").equals("admin")) {

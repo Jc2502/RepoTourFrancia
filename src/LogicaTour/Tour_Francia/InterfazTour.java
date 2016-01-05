@@ -48,5 +48,9 @@ public interface InterfazTour {
     public void rmCiclista(String nombre);
 
     public void modCiclistaEquipo(String nombre, String nombreEquipo);
+    
+    public void rmEquipo(String nombre);
+    
+    public void modDirecEquipo(String nombre, String nombreDirec);
 
 }

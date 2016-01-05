@@ -101,4 +101,14 @@ public class ProxyTour implements InterfazTour {
     public void modCiclistaEquipo(String nombre, String nombreEquipo) {
         tour.modCiclistaEquipo(nombre, nombreEquipo);
     }
+
+    @Override
+    public void rmEquipo(String nombre) {
+        tour.rmEquipo(nombre);
+    }
+
+    @Override
+    public void modDirecEquipo(String nombre, String nombreDirec) {
+        tour.modDirecEquipo(nombre, nombreDirec);
+    }
 }

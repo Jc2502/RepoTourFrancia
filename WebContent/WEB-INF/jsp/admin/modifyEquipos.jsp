@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,12 +50,12 @@
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="">Le France Tour</a></h1>
+			   <h1><a href="index.html">Le France Tour</a></h1>
 		 </div>	
 		 <div class="top-menu">
 			 <span class="menu"></span>
 			  <ul>
-				 <li><a href="indexPage.html">INICIO</a></li>
+                                 <li><a href="indexPage.html">INICIO</a></li>
 				 <li class="active"><a href="modifyEquipos.html">Añadir Equipos</a></li>
                                  <li><a href="modifyCiclistas.html">Añadir Ciclistas</a></li>
 			 </ul>			 
@@ -89,12 +92,74 @@
 		</div>
 </div>
 <!-- banner -->
+        <div class="strip">
+            <div class="container">
+                <div class="dropdown">
+                    <form:form method="POST" action="loadEquipo" commandName="equipoBean">
+                        <table>
+                            <tr>
+                                <td>Please select:</td>
+                                <td><form:select path="nombre">
+                                        <ul class="dropdown-menu">
+                                            <li><form:option value="" label="Nuevo Equipo"/></li>
+                                             <c:forEach var="i" items="${listaEquipos}">
+                                            <form:option value="${i.nombre}" label="${i.nombre}" />
+                                             </c:forEach>  
+                                        </ul>
+                                    </form:select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" name="submit" value="Submit"></td>
+                            </tr>
+                            <tr>
+                        </table>
+                    </form:form>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <form:form method="POST" action="modEquipo" commandName="equipoBean" >
+            <div class="container">
+                <h2>Datos del equipo</h2>
+                <p></p>            
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h4>Nombre del Equipo</h4></td>
+                            <td><form:input id="nombre" name="nombre" path="nombre"/><br></td>
+                        </tr>
+                        <tr>
+                            <td><h4>Nombre del director</td>
+                            <td><form:input id="$(nomDirec)" name="nombreDirector"  path="nombreDirector" /><br></td>
+                        </tr>
+                         <tr>
+                            <td><input type="submit" name="submit" value="Update"></td>
+                            <td><input type="submit" name="submit" value="Remove"></td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form:form>
 
 <!--footer-->
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
 			 <p>© 2015 Soccer. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a> </p>
+		 </div>
+		 <div class="footer-menu">
+
 		 </div>
 		 <div class="clearfix"></div>
 	 </div>

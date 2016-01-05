@@ -152,8 +152,6 @@ public class Tour implements InterfazTour {
             ciclistas.put(nombre, ciclista);
             equipos.get(nombreEquipo).getCiclistas().add(ciclista);
             try {
-                System.out.println("INSERT INTO Ciclista (nombre, numero_dorsal, nombre_equipo) VALUES('" + ciclista.getNombre() + "'," + ciclista.getDorsal() + ",'" + ciclista.getNombreEquipo() + "')");
-
                 s.executeUpdate("INSERT INTO Ciclista VALUES('" + ciclista.getNombre() + "','" + ciclista.getDorsal() + "','" + ciclista.getNombreEquipo() + "')");
             } catch (SQLException ex) {
                 Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,7 +165,14 @@ public class Tour implements InterfazTour {
         if (existeEquipo(nombreEquipo)) {
             System.out.println("YA EXISTE");//Throwear algo
         } else {
-            equipos.put(nombreEquipo, new Equipo(nombreEquipo, nombreDirector));
+            try {
+                equipos.put(nombreEquipo, new Equipo(nombreEquipo, nombreDirector));
+
+                s.executeUpdate("INSERT INTO Equipo VALUES('" + nombreDirector + "','" + nombreEquipo + "')");
+            } catch (SQLException ex) {
+                Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
 
     }
@@ -307,9 +312,9 @@ public class Tour implements InterfazTour {
     public void rmCiclista(String nombre) {
         try {
             ciclistas.remove(nombre);
-            s.executeUpdate("DELETE FROM Ganador_Etapa WHERE numero_dorsal = (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
-            s.executeUpdate("DELETE FROM Ganador_Puerto WHERE numero_dorsal = (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
-            s.executeUpdate("DELETE FROM Portador_Maillot WHERE numero_dorsal = (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Ganador_Etapa WHERE numero_dorsal in (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Ganador_Puerto WHERE numero_dorsal in (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Portador_Maillot WHERE numero_dorsal in (SELECT numero_dorsal from Ciclista WHERE nombre = '" + nombre + "')");
             s.executeUpdate("DELETE FROM Ciclista WHERE nombre = '" + nombre + "'");
         } catch (SQLException ex) {
             Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
@@ -320,6 +325,29 @@ public class Tour implements InterfazTour {
     public void modCiclistaEquipo(String nombre, String nombreEquipo) {
         try {
             rs = s.executeQuery("UPDATE Ciclista SET nombre_equipo = '" + nombreEquipo + "' WHERE nombre = '" + nombre + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void rmEquipo(String nombre) {
+        try {
+            equipos.remove(nombre);
+            s.executeUpdate("DELETE FROM Ganador_Etapa WHERE numero_dorsal in (SELECT numero_dorsal from Ciclista WHERE nombre_equipo = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Ganador_Puerto WHERE numero_dorsal in (SELECT numero_dorsal from Ciclista WHERE nombre_equipo = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Portador_Maillot WHERE numero_dorsal in (SELECT numero_dorsal from Ciclista WHERE nombre_equipo = '" + nombre + "')");
+            s.executeUpdate("DELETE FROM Ciclista WHERE nombre_equipo = '" + nombre + "'");
+            s.executeUpdate("DELETE FROM Equipo WHERE nombre_equipo = '" + nombre + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void modDirecEquipo(String nombre, String nombreDirec) {
+        try {
+            s.executeQuery("UPDATE Equipo SET director = '" + nombreDirec + "' WHERE nombre_equipo = '" + nombre + "'");
         } catch (SQLException ex) {
             Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -55,7 +55,7 @@
                     <span class="menu"></span>
                     <ul>
                         <li><a href="indexPage.html">INICIO</a></li>
-                        <li class="active"><a href="addEquipos.html">Añadir Equipos</a></li>
+                        <li class="active"><a href="modifyEquipos.html">Añadir Equipos</a></li>
                         <li><a href="modifyCiclistas.html">Añadir Ciclistas</a></li>
                     </ul>			 
                 </div>
