@@ -111,4 +111,14 @@ public class ProxyTour implements InterfazTour {
     public void modDirecEquipo(String nombre, String nombreDirec) {
         tour.modDirecEquipo(nombre, nombreDirec);
     }
+
+    @Override
+    public Etapa getEtapa(int numeroEtapa) {
+        return tour.getEtapa(numeroEtapa);
+    }
+
+    @Override
+    public List<Puerto> getPuertosEtapa(int numeroEtapa) {
+        return tour.getPuertosEtapa(numeroEtapa);
+    }
 }

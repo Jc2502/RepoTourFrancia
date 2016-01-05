@@ -2,6 +2,7 @@ package com.tourfrancia.controller;
 
 import LogicaTour.Equipos.Ciclista;
 import LogicaTour.Equipos.Equipo;
+import LogicaTour.Etapas.Etapa;
 import LogicaTour.Etapas.Puerto;
 import LogicaTour.Tour_Francia.ProxyTour;
 import javax.servlet.http.HttpServletRequest;
@@ -213,11 +214,32 @@ public class LoginController {
         return new ModelAndView("puertos");
     }
 
-    @RequestMapping("/etapas")
+     @RequestMapping(value = "/loadEtapa", method = RequestMethod.POST)
+    public ModelAndView loadEtapa(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("etapaBean") Etapa etapaBean) {
+        if (modelMap.get("loggedInUser").equals("null")) {
+            return null;
+        }
+        
+        request.setAttribute("listaEtapas", proxyTour.getEtapas());
+        request.setAttribute("etapa", proxyTour.getEtapa(etapaBean.getNumeroEtapa()));
+        request.setAttribute("listaPuertos", proxyTour.getPuertosEtapa(etapaBean.getNumeroEtapa()));
+       // request.setAttribute("listaGanadorEtapaPuerto", proxyTour.getGanadorEtapaPuerto());
+        return new ModelAndView("etapas");
+    }
+    
+      @ModelAttribute("etapaBean")
+    public Etapa getEtapa() {
+        return new Etapa();
+    }
+    
+    
+    @RequestMapping(value = "/etapas", method = RequestMethod.GET)
     public ModelAndView goToEtapas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
         if (modelMap.get("loggedInUser").equals("null")) {
             return null;
         }
+        
+        request.setAttribute("listaEtapas", proxyTour.getEtapas()); 
         return new ModelAndView("etapas");
     }
 

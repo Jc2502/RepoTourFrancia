@@ -1,8 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
     <head>
-
+        
         <!--fonts-->
         <link href='//fonts.googleapis.com/css?family=Francois+One'
               rel='stylesheet' type='text/css'>
@@ -39,7 +41,11 @@
         <!-- //for-mobile-apps -->
 
         <!-- Finish adding tags -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>      
+        <script type="text/javascript" src="/TourFrancia/resources/js/geo.js" charset="utf-8"></script>
         <title>Tour de Francia</title>
     </head>
     <body>
@@ -77,37 +83,65 @@ $("span.menu").click(function () {
         <!-- banner -->
         <div class="strip">
             <div class="container">
-                <div class="search">
-                    <form>
-                        <input type="text" value="" placeholder="Search...">
-                        <input type="submit" value="">
-                    </form>
-                </div>     
-                <div class="social">			 
-                    <a href="#"><i class="facebook"></i></a>
-                    <a href="#"><i class="twitter"></i></a>
-                    <a href="#"><i class="dribble"></i></a>	
-                    <a href="#"><i class="google"></i></a>	
-                    <a href="#"><i class="youtube"></i></a>	
+                <div class="dropdown">
+                    <form:form method="POST" commandName="etapaBean" action="loadEtapa">
+                        <table>
+                            <tr>
+                                <td>Please select:</td>
+                                <td><form:select path="numeroEtapa">
+                                        <form:option value="1" label="1" />
+                                        <c:forEach var="i" items="${listaEtapas}">
+                                            <form:option value="${i.numeroEtapa}" label="${i.numeroEtapa}" />
+                                        </c:forEach>                                    
+                                    </form:select>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td><input type="submit" name="submit" value="Submit"></td>
+                            </tr>
+                            <tr>
+                        </table>
+                    </form:form>
                 </div>
-                <div class="clearfix"></div>
-            </div>
+            </div>    
+        </div>
+        <br><br><br>
+        <div class="container">
+            <h4>Etapa ${etapa.numeroEtapa} - ${etapa.numeroKilometros} kilometros</h4>
+            <h4>Ciudad de origen: ${etapa.ciudadOrigen}</h4>
+            <h4>Ciudad de destino: ${etapa.ciudadDestino}</h4>   
+            <h4>Ganador: ${etapa.ganador_etapa.nombre} - Dorsal: ${etapa.ganador_etapa.dorsal}</h4>  
+            
+        <br><br>
+        <h4>Puertos: </h4>   
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Altura máxima</th>
+                        <th>Categoría</th>
+                        <th>Dorsal Ganador</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${listaPuertos}">
+                        <tr>
+                            <td>${i.nombre}</td>
+                            <td>${i.alturaMaxima}</td>
+                            <td>${i.categoria}</td>
+                            <td>${i.dorsalGanador}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
         </div>
         <!-- banner -->
         <!-- 404 -->
-        <div class="error">
-            <div class="container">
-                <div class="error-main">
-                    <h3>404<span>error</span>
-                        <h5>Page not found</h5>
-                        <p>We are sorry but the page you are looking for does not exit.
-                            You could return to the homepage</p>
-                        <a href="index.html">BACK TO HOME</a>
-                </div>
-            </div>
-        </div>
+   
+   
         <!-- //404 -->
-        <!--footer-->
         <div class="footer">
             <div class="container">
                 <div class="copywrite">

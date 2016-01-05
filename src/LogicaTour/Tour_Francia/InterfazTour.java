@@ -37,7 +37,11 @@ public interface InterfazTour {
 
     public List<Puerto> getPuertos(String categoria);
 
+    public List<Puerto> getPuertosEtapa(int numeroEtapa);
+
     public List<Etapa> getEtapas();
+    
+    public Etapa getEtapa(int numeroEtapa);
 
     public boolean existeCiclista(String nombre);
 
@@ -52,5 +56,7 @@ public interface InterfazTour {
     public void rmEquipo(String nombre);
     
     public void modDirecEquipo(String nombre, String nombreDirec);
+    
+    
 
 }

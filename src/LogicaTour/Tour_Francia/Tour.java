@@ -352,4 +352,21 @@ public class Tour implements InterfazTour {
             Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public Etapa getEtapa(int numeroEtapa) {
+        return etapas.get(numeroEtapa);
+    }
+
+    @Override
+    public List<Puerto> getPuertosEtapa(int numeroEtapa) {
+        ArrayList<Puerto> puertos = new ArrayList<>();
+        for (Map.Entry<String, InterfazTerreno> entry : etapas.get(numeroEtapa).getListaDesniveles().entrySet()) {
+            String key = entry.getKey();
+            Puerto value = (Puerto) entry.getValue();
+            puertos.add(value);
+        }
+        return puertos;
+                
+    }
 }
