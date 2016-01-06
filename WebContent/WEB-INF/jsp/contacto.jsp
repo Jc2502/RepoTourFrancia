@@ -95,16 +95,39 @@ $("span.menu").click(function () {
         </div>
         <!-- banner -->
         <!-- 404 -->
-        <div class="error">
-            <div class="container">
-                <div class="error-main">
-                    <h3>404<span>error</span>
-                        <h5>Page not found</h5>
-                        <p>We are sorry but the page you are looking for does not exit.
-                            You could return to the homepage</p>
-                        <a href="index.html">BACK TO HOME</a>
-                </div>
-            </div>
+         <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><th>
+                        <th><th>
+                        </tr>
+                </thead>
+                <tbody>
+
+                            <tr>
+                                <th>Nombre</th>
+                                <td>Carlos Múgica Gómez</td>
+                                <td>Juan Carlos Acosta</td>
+                            </tr>
+                             <tr>
+                                <th>Cargo</th>
+                                <td>Director General</td>
+                                <td>General Director</td>
+                            </tr>
+                             <tr>
+                                <th>Correo electrónico</th>
+                                <th>carlosmg91@gmail.com</th>
+                                <td>juank2acosta@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <th>Teléfono móvil</th>
+                                <td>666 666 666</td>
+                                <td>999 999 999</td>
+                            </tr>
+                </tbody>
+            </table>
         </div>
         <!-- //404 -->
         <div class="footer">

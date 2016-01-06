@@ -121,4 +121,14 @@ public class ProxyTour implements InterfazTour {
     public List<Puerto> getPuertosEtapa(int numeroEtapa) {
         return tour.getPuertosEtapa(numeroEtapa);
     }
+
+    @Override
+    public List<Ciclista> getListaCiclistas() {
+        return tour.getListaCiclistas();
+    }
+
+    @Override
+    public void setGanadorEtapa(int numeroEtapa, Ciclista ganadorEtapa) {
+        tour.setGanadorEtapa(numeroEtapa, ganadorEtapa);
+    }
 }

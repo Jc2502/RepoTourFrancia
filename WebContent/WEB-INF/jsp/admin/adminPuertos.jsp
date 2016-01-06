@@ -41,7 +41,11 @@
         <!-- //for-mobile-apps -->
 
         <!-- Finish adding tags -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>      
+        <script type="text/javascript" src="/TourFrancia/resources/js/geo.js" charset="utf-8"></script>
         <title>Tour de Francia</title>
     </head>
     <body>
@@ -49,7 +53,7 @@
         <div class="header">
             <div class="container">
                 <div class="logo">
-                    <h1><a href="index.html">Le France Tour</a></h1>
+                    <h1><a href="indexPage.html">Le France Tour</a></h1>
                 </div>	
                 <div class="top-menu">
                     <span class="menu"></span>
@@ -75,24 +79,21 @@
         </div>
         <!-- //header -->
         <!-- banner -->
-      
-        <!-- banner -->
-        <!-- 404 -->
-
         <div class="strip">
             <div class="container">
                 <div class="dropdown">
-                    <form:form method="POST" action="loadCiclista" commandName="ciclistaBean">
+                    <form:form method="POST" commandName="etapaBean" action="loadPuerto">
                         <table>
                             <tr>
-                                <td>Please select:</td>
-                                <td><form:select path="nombre">
-                                        <ul class="dropdown-menu">
-                                            <li><form:option value="" label="Nuevo Ciclista"/></li>
-                                            <li><form:options items="${listaCiclistas}" /></li>
-                                        </ul>
+                                <td>Seleccionar Etapa:</td>
+                                <td><form:select path="numeroEtapa">
+                                        <form:option value="1" label="1" />
+                                        <c:forEach var="i" items="${listaEtapas}">
+                                            <form:option value="${i.numeroEtapa}" label="${i.numeroEtapa}" />
+                                        </c:forEach>                                    
                                     </form:select>
                                 </td>
+
                             </tr>
                             <tr>
                                 <td><input type="submit" name="submit" value="Submit"></td>
@@ -101,55 +102,50 @@
                         </table>
                     </form:form>
                 </div>
-            </div>
+            </div>    
         </div>
+        <br><br><br>
+        <div class="container">
 
-        <br>
-        <br>
-        <br>
+            <br><br>
+            <h4>Puertos: </h4>   
 
-        <form:form method="POST" commandName="ciclistaBean">
-            <div class="container">
-                <h2>Datos del ciclista</h2>
-                <p></p>            
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><h4>Nombre</h4></td>
-                            <td><form:input id="nombre" name="nombre" path="nombre"/><br></td>
-                        </tr>
-                        <tr>
-                            <td><h4>Equipo</td>
-                            <td><form:select path="nombreEquipo">
-                                    <form:option value="${ciclista.nombreEquipo}" label="${ciclista.nombreEquipo}" />
-                                    <c:forEach var="i" items="${listaEquipos}">
-                                        <form:option value="${i.nombre}" label="${i.nombre}" />
-                                    </c:forEach>                                    
-                                </form:select>
-                            </td>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Altura máxima</th>
+                        <th>Categoría</th>
+                        <th>Dorsal Ganador</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${listaPuertos}" varStatus="indexVar">
+                        <form:form method="POST" commandName="puertoBean" action="modPuerto">
+                            <tr>
+                                <td>${i.nombre}</td>
+                                <td>${i.alturaMaxima}</td>
+                                <td>${i.categoria}</td>
+                                <td><form:select path="dorsalGanador">
+                                        <form:option value="${i.dorsalGanador}" label="${i.dorsalGanador}" />
+                                        <c:forEach var="i" items="${listaCiclistas}">
+                                            <form:option value="${i.dorsal}" label="${i.dorsal}" />
+                                        </c:forEach> 
+                                    </form:select>
+                                </td>
+                                <td><input type="submit" name="submit" value="Submit"></td>
 
-                        </tr>
-                        <tr>
-                            <td><h4>Dorsal</td>
-                            <td>${ciclista.dorsal}</td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" name="submit" value="Update"></td>
-                            <td><input type="submit" name="submit" value="Remove"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </form:form>
+                            </tr>
+                        </form:form>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <!-- banner -->
+        <!-- 404 -->
+
 
         <!-- //404 -->
-        <!--footer-->
         <div class="footer">
             <div class="container">
                 <div class="copywrite">

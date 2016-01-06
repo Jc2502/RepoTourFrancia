@@ -19,6 +19,7 @@ import com.tourfrancia.delegate.LoginDelegate;
 import com.tourfrancia.viewBean.LoginBean;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -380,6 +381,57 @@ public class LoginController {
         return new ModelAndView("admin/indexPage");
 
     }
+    
+     @RequestMapping(value = "/adminEtapas", method = RequestMethod.GET)
+    public ModelAndView goToAdminEtapas(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+
+        if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }
+        request.setAttribute("etapaBean", proxyTour.getEtapa(1));
+        request.setAttribute("listaCiclistas", proxyTour.getListaCiclistas());
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        request.setAttribute("listaEtapas", proxyTour.getEtapas());
+        return new ModelAndView("admin/adminEtapas");
+
+    }
+    @RequestMapping(value = "/modEtapa", method = RequestMethod.POST)
+    public ModelAndView modEtapa(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, @ModelAttribute("etapaBean") Etapa etapaBean) {
+        System.out.println("modetapas");
+        if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }
+        if (etapaBean!= null) {
+            if (etapaBean.getGanador_etapa() != null) {
+                proxyTour.setGanadorEtapa(etapaBean.getNumeroEtapa(),etapaBean.getGanador_etapa());
+            }
+        }
+        request.setAttribute("listaCiclistas", proxyTour.getListaCiclistas());
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        request.setAttribute("listaEtapas", proxyTour.getEtapas());
+        return new ModelAndView("admin/adminEtapas");
+
+    }
+    
+    
+     @RequestMapping(value = "/adminPuertos", method = RequestMethod.GET)
+    public ModelAndView goToAdminPuertos(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+
+        if (!modelMap.get("loggedInUser").equals("admin")) {
+            return null;
+        }
+        request.setAttribute("etapaBean", proxyTour.getEtapa(1));
+        request.setAttribute("listaCiclistas", proxyTour.getListaCiclistas());
+        request.setAttribute("listaEquipos", proxyTour.getEquipos());
+        request.setAttribute("listaEtapas", proxyTour.getEtapas());
+        request.setAttribute("listaPuertos", proxyTour.getPuertos());
+        return new ModelAndView("admin/adminPuertos");
+
+    }
+    
+    
+    
+    
     
      @RequestMapping(value = "/logout")
      public ModelAndView logout(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap){

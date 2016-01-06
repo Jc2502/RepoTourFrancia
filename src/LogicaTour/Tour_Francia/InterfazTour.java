@@ -30,6 +30,8 @@ public interface InterfazTour {
     public Ciclista getCiclista(String nombreCiclista);
 
     public List<String> getCiclistas();
+    
+    public List<Ciclista> getListaCiclistas();
 
     public List<Equipo> getEquipos();
 
@@ -57,6 +59,6 @@ public interface InterfazTour {
     
     public void modDirecEquipo(String nombre, String nombreDirec);
     
-    
+    public void setGanadorEtapa(int numeroEtapa, Ciclista ganadorEtapa);
 
 }

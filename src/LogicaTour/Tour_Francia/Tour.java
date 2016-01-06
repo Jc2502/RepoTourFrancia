@@ -369,4 +369,26 @@ public class Tour implements InterfazTour {
         return puertos;
                 
     }
+
+    @Override
+    public List<Ciclista> getListaCiclistas() {
+          ArrayList<Ciclista> ciclistasLista = new ArrayList<>();
+        for (Map.Entry<String, Ciclista> entry : ciclistas.entrySet()) {
+            String key = entry.getKey();
+            Ciclista value = entry.getValue();
+            ciclistasLista.add(value);
+        }
+        return ciclistasLista;
+    }
+
+    @Override
+    public void setGanadorEtapa(int numeroEtapa, Ciclista ganadorEtapa) {
+        etapas.get(numeroEtapa).setGanador_etapa(ganadorEtapa);
+         try {
+           if(!(s.executeQuery("UPDATE Ganador_Etapa SET numero_dorsal = '" + ganadorEtapa.getDorsal() + "' WHERE numero_etapa = '" + numeroEtapa + "'")).rowUpdated());
+                s.executeQuery("INSERT INTO Ganador_Etapa VALUES('" + ganadorEtapa.getDorsal() + "', numero_etapa = '" + numeroEtapa + "')");
+         } catch (SQLException ex) {
+            Logger.getLogger(Tour.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

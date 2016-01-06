@@ -50,7 +50,7 @@
         <div class="header">
             <div class="container">
                 <div class="logo">
-                    <h1><a href="index.html">Le France Tour</a></h1>
+                    <h1><a href="indexPage.html">Le France Tour</a></h1>
                 </div>	
                 <div class="top-menu">
                     <span class="menu"></span>
@@ -58,15 +58,17 @@
                         <li><a href="indexPage.html">INICIO</a></li>
                         <li class="active"><a href="modifyEquipos.html">Añadir Equipos</a></li>
                         <li><a href="modifyCiclistas.html">Añadir Ciclistas</a></li>
+                        <li><a href="adminEtapas.html">Administrar Etapas</a></li>
+                        <li><a href="adminPuertos.html">Administrar Puertos</a></li>
                         <li><a href="logout">Cerrar Sesion</a></li>
                     </ul>			 
                 </div>
                 <!-- script-for-menu -->
                 <script>
-$("span.menu").click(function () {
-    $(".top-menu ul").slideToggle("slow", function () {
-    });
-});
+                    $("span.menu").click(function () {
+                        $(".top-menu ul").slideToggle("slow", function () {
+                        });
+                    });
                 </script>
                 <!-- script-for-menu -->
                 <div class="clearfix"></div>
@@ -74,24 +76,7 @@ $("span.menu").click(function () {
         </div>
         <!-- //header -->
         <!-- banner -->
-        <div class="strip">
-            <div class="container">
-                <div class="search">
-                    <form>
-                        <input type="text" value="" placeholder="Search...">
-                        <input type="submit" value="">
-                    </form>
-                </div>     
-                <div class="social">			 
-                    <a href="#"><i class="facebook"></i></a>
-                    <a href="#"><i class="twitter"></i></a>
-                    <a href="#"><i class="dribble"></i></a>	
-                    <a href="#"><i class="google"></i></a>	
-                    <a href="#"><i class="youtube"></i></a>	
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
+        
         <!-- banner -->
         <div class="strip">
             <div class="container">
@@ -142,7 +127,7 @@ $("span.menu").click(function () {
                         </tr>
                         <tr>
                             <td><h4>Nombre del director</td>
-                            <td><form:input id="$(nomDirec)" name="nombreDirector"  path="nombreDirector" /><br></td>
+                            <td><form:input id="nombreDirector" name="nombreDirector"  path="nombreDirector" /><br></td>
                         </tr>
                         <tr>
                             <td><input type="submit" name="submit" value="Update"></td>
